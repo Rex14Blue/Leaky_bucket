@@ -29,4 +29,20 @@ awslocal s3 ls
 ```
 
 ### Step 2:
-I create a policy for the bucket with the principle that
+I create a policy for the bucket with the principle that give permission to anyone on the web (in my case my home network) to download files from the bucket
+```
+awslocal s3api put-bucket-policy --bucket leaky-bucket --policy file://policies/policy.json
+```
+### Step 3:
+We can now add a secret to the bucket and test if anyone can access the bucket
+
+```
+echo "Secret" > secret.txt
+awslocal s3 cp secret.txt s3://leaky-bucket/
+```
+We can verify this by deleting the local "secret.txt" and then copyting it from the leaky-bucket
+
+```
+rm secret.txt
+awslocal s3 cp s3://leaky-bucket/secret.txt .
+```
