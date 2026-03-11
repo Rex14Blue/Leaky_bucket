@@ -1,14 +1,32 @@
 # Leaky_bucket
-<span style="font-size:0.5em;">Purpose:</span>
+### Purpose:
 The point of this repo is to demonstrate key consepts of AWS security. 
 
-<span style="font-size:0.5em;">Setup:</span>
-Using a docker container I Simulate a S3 bucket locally. I generate the bucket to be public
-
-<span style="font-size:0.5em;">Stack:</span>
-Python,
+### Prerequisites:
+Python3.10+,
 Docker,
 LocalStack,
 awscli,
 vscode
 
+## Setup:
+I like to work from venv as this helps me keep track of my python packages
+
+### Step 0:
+I setup a localstack container (and verify) in docker and install requirements.txt
+
+```
+docker run -d -p 4566:4566 localstack/localstack |
+docker ps
+```
+
+### Step 1:
+I create the s3 bucket with awslocal (and verify)
+
+```
+awslocal s3 mb s3://leaky-bucket
+awslocal s3 ls
+```
+
+### Step 2:
+I create a policy for the bucket with the principle that
