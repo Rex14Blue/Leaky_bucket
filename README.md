@@ -42,7 +42,17 @@ awslocal s3 cp secret.txt s3://leaky-bucket/
 ```
 We can verify this by deleting the local "secret.txt" and then copyting it from the leaky-bucket
 
+
 ```
 rm secret.txt
 awslocal s3 cp s3://leaky-bucket/secret.txt .
+```
+
+
+## Testing and remidiation:
+
+As this is a locally hosted s3 bucket, tools like prowlser, scoutSuite or Trivy will not work as intended. 
+
+```
+python3 test.py
 ```
